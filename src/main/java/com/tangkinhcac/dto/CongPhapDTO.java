@@ -12,8 +12,10 @@ public class CongPhapDTO {
     private String tenCongPhap;
     private String moTa;
     private String phamChat;
+    private Integer idPhamChat;
     private LocalDate ngayTao;
     private LocalDate ngayCapNhat;
     private String tenLoaiCongPhap;
+    private Integer idLoaiCongPhap;
     private Boolean thatTruyen;
 }

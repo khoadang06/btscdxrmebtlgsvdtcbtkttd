@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "cong_phap")
+@ToString
 public class CongPhap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

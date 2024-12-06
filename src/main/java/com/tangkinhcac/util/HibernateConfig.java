@@ -2,6 +2,7 @@ package com.tangkinhcac.util;
 
 import com.tangkinhcac.dto.CongPhapDTO;
 import com.tangkinhcac.model.CongPhap;
+import com.tangkinhcac.model.DangNhap;
 import com.tangkinhcac.model.LoaiCongPhap;
 import com.tangkinhcac.model.PhamChat;
 import org.hibernate.SessionFactory;
@@ -29,6 +30,7 @@ public class HibernateConfig {
         conf.addAnnotatedClass(CongPhap.class);
         conf.addAnnotatedClass(LoaiCongPhap.class);
         conf.addAnnotatedClass(PhamChat.class);
+        conf.addAnnotatedClass(DangNhap.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
