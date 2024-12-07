@@ -202,6 +202,7 @@ DROP TABLE dang_nhap
     - Đi đến `Editor > File and Code Template`
     - Bấm dấu + bên góc trái (Create Template)
     - Điền tên (Name) và Extension
+    - Paste template ở bên dưới (hoặc tự tạo) vào cái khung hình chữ nhật
     - Nhấn Apply rồi Ok
     - Xong, chuột phải > new xem có chưa
 
