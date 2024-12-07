@@ -28,7 +28,7 @@ Project này có cái gì? <br/>
 ## Dependencies
 pom.xml:
 
-```
+```xml
 <dependencies>
         <dependency>
             <groupId>jakarta.servlet</groupId>
@@ -86,7 +86,95 @@ pom.xml:
         </dependency>
     </dependencies>
 ```
+## Database
+```sql
+-- Bảng loại công pháp
+CREATE TABLE loai_cong_phap (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    ten_loai_cong_phap NVARCHAR(100) NOT NULL,
+    mo_ta NVARCHAR(MAX),
+    ngay_tao DATE,
+    ngay_cap_nhat DATE
+);
 
+-- Bảng phẩm chất
+CREATE TABLE pham_chat (
+	id int IDENTITY(1,1) PRIMARY KEY,
+	ten_pham_chat NVARCHAR(100) NOT NULL,
+);
+
+-- Bảng công pháp
+CREATE TABLE cong_phap (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    ten_cong_phap NVARCHAR(100) NOT NULL,
+    mo_ta NVARCHAR(MAX),
+    id_pham_chat INT,
+    ngay_tao DATE,
+    ngay_cap_nhat DATE,
+    id_loai_cong_phap INT,
+    that_truyen BIT DEFAULT 0,
+    FOREIGN KEY (id_pham_chat) REFERENCES pham_chat(id),
+    FOREIGN KEY (id_loai_cong_phap) REFERENCES loai_cong_phap(id)
+);
+
+-- Bảng đăng nhập
+CREATE TABLE dang_nhap (
+	id INT IDENTITY(1,1) PRIMARY KEY,
+	ten_dang_nhap VARCHAR(100) NOT NULL,
+	mat_khau VARCHAR(100) NOT NULL,
+	admin BIT DEFAULT 0
+);
+
+-- Dữ liệu mẫu cho bảng loại công pháp
+INSERT INTO loai_cong_phap (ten_loai_cong_phap, mo_ta, ngay_tao, ngay_cap_nhat)
+VALUES 
+(N'Kiếm Pháp', N'Các công pháp võ học sử dụng kiếm', '1000-01-01', '1000-01-01'),
+(N'Thương Pháp', N'Các công pháp võ học sử dụng thương', '1000-01-01', '1000-01-01'),
+(N'Côn Pháp', N'Các công pháp võ học sử dụng côn', '1000-01-01', '1000-01-01'),
+(N'Bổng Pháp', N'Các công pháp võ học sử dụng bổng', '1000-01-01', '1000-01-01'),
+(N'Cước Pháp', N'Các công pháp võ học sử dụng cước', '1000-01-01', '1000-01-01'),
+(N'Chưởng Pháp', N'Các công pháp võ học sử dụng tay không, đánh chưởng', '1000-01-01', '1000-01-01'),
+(N'Đao Pháp', N'Các công pháp võ học sử dụng đao', '1000-01-01', '1000-01-01'),
+(N'Bảo Vệ Pháp', N'Các công pháp dùng để bảo vệ, phòng thủ', '1000-01-01', '1000-01-01');
+
+-- Dữ liệu mẫu cho bảng phẩm chất
+INSERT INTO pham_chat (ten_pham_chat)
+VALUES 
+(N'Hoàng Giai'),
+(N'Huyền Giai'),
+(N'Địa Giai'),
+(N'Thiên Giai');
+
+-- Dữ liệu mẫu cho bảng công pháp
+INSERT INTO cong_phap (ten_cong_phap, mo_ta, muc_do, ngay_tao, ngay_cap_nhat, id_loai_cong_phap, that_truyen)
+VALUES 
+(N'Đại Hồng Thủ', N'Một công pháp sử dụng cước mạnh mẽ, có thể tấn công từ xa', 2, '1000-01-01', '1000-01-01', 5, 0),
+(N'Thiết Cước', N'Một công pháp chuyên về các đòn đá chớp nhoáng, khiến đối phương không kịp phản ứng', 1, '1000-01-01', '1000-01-01', 5, 0),
+(N'Bảo Vệ Thần Công', N'Công pháp bảo vệ, có khả năng chống lại mọi đòn tấn công', 3, '1000-01-01', '1000-01-01', 8, 0),
+(N'Xích Bích Đao', N'Công pháp sử dụng đao, nổi bật với những đòn đánh chéo mạnh mẽ', 3, '1000-01-01', '1000-01-01', 7, 0),
+(N'Thiên Đao Cửu Kiếm', N'Một công pháp huyền thoại, kết hợp giữa đao pháp và kiếm pháp', 3, '1000-01-01', '1000-01-01', 7, 1),
+(N'Ngọc Diện Huyền Bảo', N'Công pháp bảo vệ sử dụng chưởng pháp, rất khó bị phá vỡ', 2, '1000-01-01', '1000-01-01', 6, 0),
+(N'Hỏa Phụng Pháp', N'Công pháp đặc biệt, mạnh mẽ nhưng khó kiểm soát', 3, '1000-01-01', '1000-01-01', 1, 1),
+(N'Vô Song Kiếm', N'Một công pháp kiếm pháp tuyệt thế, không ai sánh bằng', 3, '1000-01-01', '1000-01-01', 1, 1),
+(N'Tuyệt Tình Thương', N'Công pháp thương, mạnh mẽ và vô cùng độc đáo', 3, '1000-01-01', '1000-01-01', 2, 1),
+(N'Côn Lực Tăng Cường', N'Công pháp côn pháp tập trung vào sức mạnh và khả năng chiến đấu', 2, '1000-01-01', '1000-01-01', 3, 0),
+(N'Lăng Ba Vi Bộ', N'Một công pháp sử dụng các bước di chuyển nhanh như chớp, không ai có thể đuổi kịp', 1, '1000-01-01', '1000-01-01', 8, 0),
+(N'Cửu Âm Chân Kinh', N'Công pháp võ học cao cấp, bao gồm kiếm pháp, công phu nội công', 3, '1000-01-01', '1000-01-01', 1, 1),
+(N'Thiên Long Bát Bộ', N'Một công pháp nổi tiếng trong sử thi, bao gồm nhiều kỹ thuật và bí kíp', 2, '1000-01-01', '1000-01-01', 1, 0),
+(N'Xà Hình Thương', N'Công pháp sử dụng thương, với các thế đánh mạnh mẽ và linh hoạt', 2, '1000-01-01', '1000-01-01', 2, 0),
+(N'Vô Tình Côn Pháp', N'Một công pháp huyền bí với côn dài, mạnh mẽ nhưng cũng đầy uyển chuyển', 3, '1000-01-01', '1000-01-01', 3, 1);
+
+-- Dữ liệu mẫu bảng login
+INSERT INTO dang_nhap (ten_dang_nhap, mat_khau, admin)
+VALUES
+('chuongmon', 'chuongmon', 1),
+('detu', 'detu', 0);
+
+DROP TABLE cong_phap
+DROP TABLE loai_cong_phap
+DROP TABLE pham_chat
+DROP TABLE dang_nhap
+```
 # Cấu trúc (Structure)
 - Project của tôi sử dụng cấu trúc phân tầng (Layered Architecture)
 - Bao gồm các package
