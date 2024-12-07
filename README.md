@@ -205,6 +205,8 @@ DROP TABLE dang_nhap
     - Paste template ở bên dưới (hoặc tự tạo) vào cái khung hình chữ nhật
     - Nhấn Apply rồi Ok
     - Xong, chuột phải > new xem có chưa
+### Video hướng dẫn
+[![Watch the video](https://img.youtube.com/vi/f2Oke4RxeB4/maxresdefault.jpg)](https://www.youtube.com/watch?v=f2Oke4RxeB4)
 
 ### Servlet
 Extension: java
