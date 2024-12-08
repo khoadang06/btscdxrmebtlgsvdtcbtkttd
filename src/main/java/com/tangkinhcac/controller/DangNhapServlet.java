@@ -1,6 +1,6 @@
 package com.tangkinhcac.controller;
 
-import com.tangkinhcac.Service.DangNhapService;
+import com.tangkinhcac.service.DangNhapService;
 import com.tangkinhcac.model.DangNhap;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

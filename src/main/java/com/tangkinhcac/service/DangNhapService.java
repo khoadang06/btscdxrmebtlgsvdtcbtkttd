@@ -1,4 +1,4 @@
-package com.tangkinhcac.Service;
+package com.tangkinhcac.service;
 
 import com.tangkinhcac.model.DangNhap;
 import com.tangkinhcac.repository.DangNhapRepo;
