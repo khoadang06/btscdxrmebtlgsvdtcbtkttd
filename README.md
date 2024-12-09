@@ -84,6 +84,11 @@ pom.xml:
             <artifactId>commons-beanutils</artifactId>
             <version>1.9.4</version>
         </dependency>
+	<dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.11.0</version>
+        </dependency>
     </dependencies>
 ```
 ## Database
