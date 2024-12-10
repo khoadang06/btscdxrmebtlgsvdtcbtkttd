@@ -207,7 +207,7 @@ import FormSachComponent from '@/component/FormSachComponent.vue'
 8. Kết quả
    ![image](https://github.com/user-attachments/assets/1cc28ccd-c402-4a5b-b555-6cd279d59dc7)
 ## IV. Hàm và Phương thức (Tính năng)
-### Dữ liệu mẫu
+### Dữ liệu mẫu `SachPage.vue`
 <details>
 	<summary>List Sách</summary>
 
@@ -310,7 +310,7 @@ const listSach = reactive([
 ```
 </details>
 
-### Load dữ liệu lên table
+### Load dữ liệu lên table `SachPage.vue`
 1. Trong `<tbody>`, thêm vòng lặp như sau
    ```vue
    <template v-for="(sach, index) in listSach" :key="sach.id">
@@ -334,14 +334,245 @@ const listSach = reactive([
    - `<td>` là cell, ô trong bảng
    - `{{ sach.id }}` là lấy ra đặc tính (properties)
 2. Xong load rồi:)
-### Xoá
-1. Trong thẻ `<button>`, thêm `@click="deleteBook(sach.id)"`
-2. Khai báo hàm `deleteBook` trong thẻ `<script>`
+### Xoá `SachPage.vue`
+1. Trong thẻ `<button>`, thêm `@click="deleteSach(index)"`
+   ```vue
+   <button type="submit" class="btn btn-danger" @click="deleteSach(index)">Delete</button>
+   ```
+3. Khai báo hàm `deleteSach` trong thẻ `<script>`
    ```javascript
-   const deleteBook = (index) => {
+   const deleteSach = (index) => {
      listSach.splice(index, 1)
    }
    ```
    - **Lưu ý:** khai báo hàm **phải ở bên dưới khai báo mảng dữ liệu `const listSach = reactive([])`**, vì sao? Code chạy từ trên xuống dưới, phải khai báo mảng dữ liệu trước mới có dữ liệu để xoá
-3. Xong xoá
+4. Xong xoá
 ### Thêm
+1. Khai báo đối tượng "sach" trong thẻ `<script>` trong `SachPage.vue`
+   ```js
+   const sach = reactive({
+    ten: '',
+    loai: '',
+    tacGia: '',
+    gia: 0
+   })
+   ```
+2. Khai báo hàm `addSach` trong thẻ `<script>` trong `SachPage.vue`
+   ```js
+   const addSach = () => {
+    listSach.push({
+     id: listSach.length + 1,
+     ...sach
+    })
+   }
+   ```
+   - `...sach`, cái `...` ở đây được gọi là `"spread operator" hoặc "object spread syntax" ("toán tử trải rộng" hoặc "cú pháp trải rộng đối tượng")`, dùng để sao chép đặc tính `(properties)` của một đối tượng sang một đối tượng mới
+   ```vue
+   <button type="submit" class="btn btn-success" @click="addSach">Add</button>
+   ```
+3. Thêm `v-model` vào `<FormSachComponent/>` trong `SachPage.vue`
+   ```vue
+   <FormSachComponent v-model:book="sach"/>
+   ```
+   - `:book` có thể đặt bằng tên khác
+4. `defineModel` bên `FormSachComponent.vue`
+   ```js
+   <script setup>
+   defineModel('book', {
+    default: () => ({
+     ten: '',
+     loai: '',
+     tacGia: '',
+     gia: 0
+    })
+   })
+   </script>
+   ```
+   - Tên biến `'book'` phải trùng bới `v-model:book="sach"` ở `SachPage.vue`, ví dụ `v-model:book1="sach"` thì phải là `defineModel('book1',`
+5. Gán `v-model=""` vào các `<input>` và `<select>` tương ứng, và gán `value` cho các `<option>` trong `<select>`
+   ```
+   <template>
+    <section>
+     <form>
+      <div class="mb-3">
+        <label for="tenSach" class="form-label">Tên</label>
+        <input type="text" class="form-control" id="tenSach" v-model="book.ten">
+      </div>
+      <div class="mb-3">
+        <label for="loaiSach" class="form-label">Loại Sách</label>
+        <select class="form-select" id="loaiSach" v-model="book.loai">
+          <option value="Sách thiếu nhi">Sách thiếu nhi</option>
+          <option value="Sách khoa học">Sách khoa học</option>
+          <option value="Truyện tranh">Truyện tranh</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="tacGia" class="form-label">Tên</label>
+        <input type="text" class="form-control" id="tacGia" v-model="book.tacGia">
+      </div>
+      <div class="mb-3">
+        <label for="gia" class="form-label">Giá</label>
+        <input type="text" class="form-control" id="gia" v-model="book.gia">
+      </div>
+     </form>
+    </section>
+   </template>
+   ```
+6. Trong thẻ `<button>` của Add, thêm `@click="addSach"`
+   ```vue
+   <button type="submit" class="btn btn-success" @click="addSach">Add</button>
+   ```
+8. Xong thêm
+### Chi tiết `SachPage.vue`
+1. Thêm button chi tiết ở trong `<table>`, cụ thể là trong `v-for`
+   ```vue
+   <button type="submit" class="btn btn-primary" @click="detailSach(sach)">Chi Tiết</button>
+   ```
+   - Hàm `detailSach` nhận giá trị truyền vào `sach` từ `v-for`
+2. Khai báo hàm
+   ```js
+   const detailSach = (item) => {
+    Object.assign(sach, item)
+   }
+   ```
+   - Vì sao dùng `Object.assign` thay vì `sach.value = {...item}` như thường lệ? Vì *~~chatgpt bảo thế~~* mảng dữ liệu đang là `reactive`
+3. Xong chi tiết
+
+### Cập nhật `SachPage.vue`
+1. Trong thẻ `<button>` của Update, thêm `@click="updateSach"`
+   ```vue
+   <button type="submit" class="btn btn-warning" @click="updateSach">Update</button>
+   ```
+2. Khai báo function `indexUpdate`
+   ```js
+   const indexUpdate = ref(-1)
+   ```
+3. Sửa hàm `detailSach`
+   ```js
+   const detailSach = (item) => {
+    Object.assign(sach, item)
+    indexUpdate.value = listSach.findIndex((sach) => sach.id === item.id)
+   }
+   ```
+4. Khai báo hàm `updateSach`
+   ```js
+   const updateSach = () => {
+    listSach[indexUpdate.value] = {...sach}
+    indexUpdate.value = -1
+   }
+   ```
+5. Như thế này là đúng
+   ```js
+   const indexUpdate = ref(-1)
+
+   const detailSach = (item) => {
+    Object.assign(sach, item)
+    indexUpdate.value = listSach.findIndex((sach) => sach.id === item.id)
+   }
+
+   const updateSach = () => {
+    listSach[indexUpdate.value] = {...sach}
+    indexUpdate.value = -1
+   }
+   ```
+6. Xong cập nhật
+## V. Router *(CHỈ LÀM KHI ĐÃ XONG TOÀN BỘ PHẦN TRÊN)*
+1. Quay lại `HeaderLayout.vue`
+2. Import `RouterLink`
+   ```js
+   <script setup>
+   import { RouterLink } from 'vue-router'
+   </script>
+   ```
+   
+3. Thay thế thẻ `<a>` bằng `<RouterLink to="/{path}">{Name}</RouterLink>`
+
+   - `{path}` là đường dẫn, `{Name}` là tên
+   - Ví dụ "Trang chủ" và "Page"
+   ```vue
+   <RouterLink to="/trang-chu" class="nav-link">Trang Chủ</RouterLink>
+   <RouterLink to="/page" class="nav-link">Page</RouterLink>
+   ```
+
+   `HeaderLayout.vue`
+   ```vue
+   <script setup>
+   import { RouterLink } from 'vue-router'
+   </script>
+
+   <template>
+    <header>
+     <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <RouterLink to="/trang-chu" class="nav-link">Trang Chủ</RouterLink>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <RouterLink to="/page" class="nav-link">Page</RouterLink>
+            </li>
+          </ul>
+        </div>
+      </div>
+     </nav>
+    </header>
+   </template>
+   ```
+4. Tạo component mới cho đường dẫn `/page`
+   - Ghi đại cái quần què gì cũng được
+   - Ví dụ `RouterPage.vue`
+     ```vue
+     <template>
+      <p>
+       <strong>Đường dẫn hiện tại:</strong> {{ $route.fullPath }}
+      </p>
+     </template>
+     ```
+5. Vào `index.js` trong directory `router` và paste
+   ```js
+   import { createMemoryHistory, createRouter } from 'vue-router'
+
+   const routes = [
+    { path: '{path}', component: {component}},
+    { path: '{path}', component: {component}}
+   ]
+
+   const router = createRouter({
+    history: createMemoryHistory(),
+    routes,
+   })
+
+   export default router
+   ```
+6. Sửa và liệt kê đường dẫn, component
+   - Ví dụ
+   ```js
+   import { createMemoryHistory, createRouter } from 'vue-router'
+   import SachPage from '@/pages/SachPage.vue'
+   import RouterPage from '@/pages/RouterPage.vue'
+
+   const routes = [
+    { path: '/', component: SachPage },
+    { path: '/trang-chu', component: SachPage },
+    { path: '/page', component: RouterPage },
+   ]
+
+   const router = createRouter({
+    history: createMemoryHistory(),
+    routes,
+   })
+
+   export default router
+   ```
+   - Code trên có 3 path là "/", "/trang-chu" và "/page" lần lượt dẫn đến các component là `SachPage.vue`, `SachPage.vue` và `RouterPage.vue`
+7. Về `App.vue`
+   - Thay `<SachPage/>` ban đầu thành `<RouterView/>`
+8. Cuối cùng sang `main.js`
+   - Uncomment 2 dòng
+     ```javascript
+     import router from './router'
+     app.use(router)
+     ```
+9. Xong
