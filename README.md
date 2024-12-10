@@ -155,4 +155,54 @@ Thấy môn đề là backend mà thấy giống fullstack hơn
    <button type="submit" class="btn btn-success">Add</button>
    <button type="submit" class="btn btn-warning">Update</button>
    ```
+6. Thêm 1 cái table nữa, chôm bootstrap tiếp thôi, hoặc:
+   ```vue
+   <table class="table">
+     <thead>
+     <tr>
+       <th scope="col">ID</th>
+       <th scope="col">Tên</th>
+       <th scope="col">Loại</th>
+       <th scope="col">Tác Giả</th>
+       <th scope="col">Giá</th>
+       <th scope="col">Chức Năng</th>
+     </tr>
+     </thead>
+     <tbody>
+  
+     </tbody>
+   </table>
+   ```
 SachPage.vue:
+```vue
+<script setup>
+import FormSachComponent from '@/component/FormSachComponent.vue'
+</script>
+
+<template>
+  <section class="container">
+    <h1 style="text-align: center">Quản Lý Sách</h1>
+    <FormSachComponent/>
+    <button type="submit" class="btn btn-success">Add</button>
+    <button type="submit" class="btn btn-warning">Update</button>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Tên</th>
+        <th scope="col">Loại</th>
+        <th scope="col">Tác Giả</th>
+        <th scope="col">Giá</th>
+        <th scope="col">Chức Năng</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </section>
+</template>
+```
+7. Quay lại App.vue và gọi `<SachPage/>` ở giữa `<HeaderLayout/>` và `<FooterLayout/>`
+8. Kết quả
+   ![image](https://github.com/user-attachments/assets/1cc28ccd-c402-4a5b-b555-6cd279d59dc7)
