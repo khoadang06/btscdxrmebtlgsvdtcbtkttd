@@ -62,7 +62,7 @@ Thấy môn đề là backend mà thấy giống fullstack hơn
    - **Lưu ý:** Đừng đặt tên component là `Header` hay `Footer` vì nó trùng keyword
 3. Lên [Bootstrap](https://getbootstrap.com/) shopping thôi
    - Bấm vào `Read the docs`
-   - ![image](https://github.com/user-attachments/assets/e3d54c60-42a1-48e3-9057-dcbcfa0b9643)
+     ![image](https://github.com/user-attachments/assets/e3d54c60-42a1-48e3-9057-dcbcfa0b9643)
 4. HeaderLayout.vue
    - Có thể chôm template bootstrap `Navbar` hoặc `Navs & Tabs`
    - Paste vào và xoá những thứ thừa ví dụ như `<form>`
@@ -206,3 +206,142 @@ import FormSachComponent from '@/component/FormSachComponent.vue'
 7. Quay lại App.vue và gọi `<SachPage/>` ở giữa `<HeaderLayout/>` và `<FooterLayout/>`
 8. Kết quả
    ![image](https://github.com/user-attachments/assets/1cc28ccd-c402-4a5b-b555-6cd279d59dc7)
+## IV. Hàm và Phương thức (Tính năng)
+### Dữ liệu mẫu
+<details>
+	<summary>List Sách</summary>
+
+`reactive` là `ref`, nhưng bố đời hơn
+
+```javascript
+const listSach = reactive([
+  {
+    ten: 'Tên 1',
+    loai: 'Loại 1',
+    tacGia: 'Tác giả 1',
+    gia: 60,
+    id: '1'
+  },
+  {
+    ten: 'Tên 2',
+    loai: 'Loại 2',
+    tacGia: 'Tác giả 2',
+    gia: 95,
+    id: '2'
+  },
+  {
+    ten: 'Tên 3',
+    loai: 'Loại 3',
+    tacGia: 'Tác giả 3',
+    gia: 19,
+    id: '3'
+  },
+  {
+    ten: 'Tên 4',
+    loai: 'Loại 4',
+    tacGia: 'Tác giả 4',
+    gia: 50,
+    id: '4'
+  },
+  {
+    ten: 'Tên 5',
+    loai: 'Loại 5',
+    tacGia: 'Tác giả 5',
+    gia: 44,
+    id: '5'
+  },
+  {
+    ten: 'Tên 6',
+    loai: 'Loại 6',
+    tacGia: 'Tác giả 6',
+    gia: 24,
+    id: '6'
+  },
+  {
+    ten: 'Tên 7',
+    loai: 'Loại 7',
+    tacGia: 'Tác giả 7',
+    gia: 90,
+    id: '7'
+  },
+  {
+    ten: 'Tên 8',
+    loai: 'Loại 8',
+    tacGia: 'Tác giả 8',
+    gia: 38,
+    id: '8'
+  },
+  {
+    ten: 'Tên 9',
+    loai: 'Loại 9',
+    tacGia: 'Tác giả 9',
+    gia: 64,
+    id: '9'
+  },
+  {
+    ten: 'Tên 10',
+    loai: 'Loại 10',
+    tacGia: 'Tác giả 10',
+    gia: 40,
+    id: '10'
+  },
+  {
+    ten: 'Tên 11',
+    loai: 'Loại 11',
+    tacGia: 'Tác giả 11',
+    gia: 87,
+    id: '11'
+  },
+  {
+    ten: 'Tên 12',
+    loai: 'Loại 12',
+    tacGia: 'Tác giả 12',
+    gia: 93,
+    id: '12'
+  },
+  {
+    ten: 'Tên 13',
+    loai: 'Loại 13',
+    tacGia: 'Tác giả 13',
+    gia: 15,
+    id: '13'
+  }
+])
+```
+</details>
+
+### Load dữ liệu lên table
+1. Trong `<tbody>`, thêm vòng lặp như sau
+   ```vue
+   <template v-for="(sach, index) in listSach" :key="sach.id">
+    <tr v-for="sach in listSach" :key="sach.id">
+     <td>{{ sach.id }}</td>
+     <td>{{ sach.ten }}</td>
+     <td>{{ sach.loai }}</td>
+     <td>{{ sach.tacGia }}</td>
+     <td>{{ sach.gia }}</td>
+     <td>
+      <button type="submit" class="btn btn-danger">Delete</button>
+     </td>
+    </tr>
+   </template>
+   ```
+   - `<tr>` là table row tức dòng trong bảng
+   - `v-for="(sach, index) in listSach" :key="sach.id"`
+     - `v-for=` là vòng lặp, giống `<c:forEach>`
+     - `"(sach, index) in listSach"` "sach" là tên biến, có thể đặt là "s" hoặc bất cứ thứ gì, `index` là vị trí của `sach` trong mảng bắt đầu từ `0`, "listSach" là tên mảng dữ liệu chỗ `const listSach = reactive([])`
+     - `:key` cứ nghĩ nó giống primary key trong sql ấy
+   - `<td>` là cell, ô trong bảng
+   - `{{ sach.id }}` là lấy ra đặc tính (properties)
+2. Xong load rồi:)
+### Xoá
+1. Trong thẻ `<button>`, thêm `@click="deleteBook(sach.id)"`
+2. Khai báo hàm `deleteBook` trong thẻ `<script>`
+   ```javascript
+   const deleteBook = (index) => {
+     listSach.splice(index, 1)
+   }
+   ```
+   - **Lưu ý:** khai báo hàm **phải ở bên dưới khai báo mảng dữ liệu `const listSach = reactive([])`**, vì sao? Code chạy từ trên xuống dưới, phải khai báo mảng dữ liệu trước mới có dữ liệu để xoá
+3. Xong xoá
+### Thêm
