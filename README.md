@@ -367,9 +367,6 @@ const listSach = reactive([
    }
    ```
    - `...sach`, cái `...` ở đây được gọi là `"spread operator" hoặc "object spread syntax" ("toán tử trải rộng" hoặc "cú pháp trải rộng đối tượng")`, dùng để sao chép đặc tính `(properties)` của một đối tượng sang một đối tượng mới
-   ```vue
-   <button type="submit" class="btn btn-success" @click="addSach">Add</button>
-   ```
 3. Thêm `v-model` vào `<FormSachComponent/>` trong `SachPage.vue`
    ```vue
    <FormSachComponent v-model:book="sach"/>
