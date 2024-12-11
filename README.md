@@ -314,7 +314,7 @@ const listSach = reactive([
 1. Trong `<tbody>`, thêm vòng lặp như sau
    ```vue
    <template v-for="(sach, index) in listSach" :key="sach.id">
-    <tr v-for="sach in listSach" :key="sach.id">
+    <tr>
      <td>{{ sach.id }}</td>
      <td>{{ sach.ten }}</td>
      <td>{{ sach.loai }}</td>
