@@ -573,3 +573,27 @@ const listSach = reactive([
      app.use(router)
      ```
 9. Xong
+**Lưu ý:** Đây chỉ là router không truyền tham số (params), còn router có tham số (hay Dynamic Router Matching) thì **Chịu**
+## VI. Validate
+1. Sửa hàm add
+   ```js
+   const addKhoaHoc = () => {
+   if (!khoaHoc.tenKhoaHoc) {
+     alert('Vui lòng điền tên khoá học')
+     return
+   }if (!khoaHoc.tenGiangVien) {
+     alert('Vui lòng điền tên giảng viên')
+     return
+   }if (!khoaHoc.soLuongHocVien) {
+     alert('Vui lòng điền số lượng học viên')
+     return
+   }if (!khoaHoc.thoiGianHoc) {
+     alert('Vui lòng chọn thời gian học')
+     return
+   }
+   listKhoaHoc.push({
+     id: listKhoaHoc.length + 1,
+     ...khoaHoc
+   })
+   }
+   ```
