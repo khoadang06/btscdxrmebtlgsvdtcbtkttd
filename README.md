@@ -6,12 +6,13 @@
 | IDE | IntelliJ IDEA 202x |
 
 ## Dependencies
-| Tên | Version |
+| Tên | Maven Repo |
 | --- | --- |
-| Spring Boot DevTools | |
-| Spring Web | |
-| Lombok | |
-| Thymeleaf | |
+| Spring Boot DevTools | [Maven](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools) |
+| Spring Web | [Maven](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web) |
+| Lombok | [Maven](https://mvnrepository.com/artifact/org.projectlombok/lombok) |
+| Thymeleaf | [Maven](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf) |
+| Starter Validation | [Maven](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation) |
 
 # Cấu trúc dự án
 | Tên | Mục đích |
@@ -36,6 +37,9 @@
 | th:if | Hiển thị có điều kiện |
 | th:each | Vòng lặp |
 | th:value | Thiết lập giá trị của trường nhập |
+| th:object | Đối tượng |
+| th:field | Thay cho name="" trong html |
+| th:errors | Lấy lỗi |
 
 ## Expressions
 | Tên | Mục đích | Ví dụ |
