@@ -200,18 +200,6 @@ DROP TABLE dang_nhap
 - Trong package static có package js dùng để chứa javascript, tức là ajax
 
 # Một số thứ vớ vẩn khác
-## File và Code Template
-- Dành riêng cho các cháu dùng IntelliJ IDEA 2024 như thằng chủ repo và không tìm thấy servlet, filter khi chuột phải > new, thì là do IntelliJ nó xóa bà nó rồi, IntelliJ bản 21 trở về trước mới có:) làm theo như bên dưới để có lại
-- Cách dùng code Template
-    - Vào setting `Ctrl + Alt + S`
-    - Đi đến `Editor > File and Code Template`
-    - Bấm dấu + bên góc trái (Create Template)
-    - Điền tên (Name) và Extension
-    - Paste template ở bên dưới (hoặc tự tạo) vào cái khung hình chữ nhật
-    - Nhấn Apply rồi Ok
-    - Xong, chuột phải > new xem có chưa
-### Video hướng dẫn
-[![Watch the video](https://img.youtube.com/vi/f2Oke4RxeB4/maxresdefault.jpg)](https://www.youtube.com/watch?v=f2Oke4RxeB4)
 
 ### Servlet
 Extension: java
