@@ -12,7 +12,7 @@
 | Spring Web | [Maven](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web) |
 | Lombok | [Maven](https://mvnrepository.com/artifact/org.projectlombok/lombok) |
 | Thymeleaf | [Maven](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf) |
-| Starter Validation | [Maven](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation) |
+| Spring Validation | [Maven](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation) |
 
 # Cấu trúc dự án
 | Tên | Mục đích |
