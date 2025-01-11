@@ -38,11 +38,11 @@
 | th:value | Thiết lập giá trị của trường nhập |
 
 ## Expressions
-| Tên | Định nghĩa | Use Cases |
+| Tên | Mục đích | Ví dụ |
 | --- | --- | --- |
-| @{ } | Biểu thức cho URL, đường dẫn | th:href, th:src, th:action |
-| ${ } | Biểu thức biến | Hiển thị dữ liệu trong văn bản hoặc thuộc tính |
-| *{ } | Biểu thức biến lựa chọn | thường sử dụng chung với `th:object` hay `th:each` |
+| @{ } | Tạo URLs | `<a th:href="@{/home}">` |
+| ${ } | Truy cập biến | `<p th:text="${message}">` |
+| *{ } | Truy cập thuộc tính của đối tượng đã chọn | `<input th:field="*{name}">` |
 
 
 # Hướng dẫn
